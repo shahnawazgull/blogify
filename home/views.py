@@ -81,7 +81,10 @@ def delete_blogs(request,id):
     blogs.delete()
     return redirect('landing')
 def landing(request):
-    blogs = Blog.objects.all()
+    if request.user.is_authenticated:
+        blogs = Blog.objects.filter(user=request.user )
+    else:
+        blogs = Blog.objects.all()
     context = {'blog':blogs,'is_landing': True}
     return render(request,'landing.html',context)
 def comments(request,id):
