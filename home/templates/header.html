@@ -9,10 +9,10 @@
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" type="image/png">
 </head>
 
-<body class="bg-gray-900 text-white min-h-screen">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
     <!-- Header -->
-    <header class="flex justify-between items-center px-4 md:px-10 py-6 mb-8">
-        <h1 class="text-3xl font-bold">
+    <header class="flex justify-between items-center px-4 sm:px-6 md:px-10 py-6 mb-8">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold">
             {% if is_landing %}
             {% if user.is_authenticated %}
             <a href="{% url 'landing' %}">Welcome <span class="text-blue-400">{{ user.first_name }}</span></a>
@@ -20,38 +20,59 @@
             <a href="{% url 'landing' %}">Welcome to <span class="text-blue-400">Blogify</span></a>
             {% endif %}
             {% elif user.is_authenticated %}
-            {% if is_upload%}
+            {% if is_upload %}
             <a href="{% url 'landing' %}">Upload a New <span class="text-blue-400">Blog</span></a>
             {% else %}
             <a href="{% url 'landing' %}">Welcome <span class="text-blue-400">{{user.first_name}}</span></a>
             {% endif %}
             {% endif %}
         </h1>
-        <div class="space-x-4">
+        <!-- Hamburger Icon for Mobile -->
+        <button id="hamburger" class="sm:hidden text-white focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+        <!-- Navigation Menu -->
+        <div id="nav-menu"
+            class="hidden sm:flex sm:items-center sm:gap-4 flex-col sm:flex-row absolute sm:static top-16 left-0 w-full sm:w-auto bg-gray-900 sm:bg-transparent p-4 sm:p-0 transition-all duration-300">
             {% if user.is_authenticated %}
             {% if is_upload or is_update %}
-            <a href="{% url 'landing' %}" class="text-sm bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded">← Back to
+            <a href="{% url 'landing' %}"
+                class="text-sm bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded transition-colors duration-200">← Back to
                 Home</a>
             {% else %}
             <a href="{% url 'upload_blogs' %}"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">+ Upload Blog</a>
-            {% endif%}
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors duration-200">+
+                Upload Blog</a>
+            {% endif %}
             <a href="{% url 'user_logout' %}" onclick="return confirm('Are you sure you want to log out?');"
-                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Logout</a>
+                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm transition-colors duration-200">Logout</a>
             {% else %}
             <a href="{% url 'register' %}"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">Register</a>
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors duration-200">Register</a>
             <a href="{% url 'login' %}"
-                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Login</a>
+                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm transition-colors duration-200">Login</a>
             {% endif %}
         </div>
     </header>
 
     <!-- Main content -->
-    <main class="px-4 md:px-10">
+    <main>
         {% block content %}
         {% endblock %}
     </main>
+
+    <!-- JavaScript for Hamburger Menu Toggle -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>

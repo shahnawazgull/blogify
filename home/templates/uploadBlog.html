@@ -1,54 +1,47 @@
 {% include "header.html" %}
-<body class="bg-gray-900 text-white min-h-screen px-6 py-8">
-    <!-- Upload Form -->
-    <div class="bg-gray-800 p-6 rounded-lg shadow-md max-w-2xl mx-auto">
-        <form method="post" enctype="multipart/form-data" class="space-y-6">
-            {% csrf_token %}
-            <!-- Title -->
-            <div>
-                <label for="id_title" class="block mb-2 text-sm font-medium text-gray-300">Title</label>
-                <input type="text" name="title" id="id_title"
-                    class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required>
-            </div>
-            <!-- Description -->
-            <div>
-                <label for="id_desc" class="block mb-2 text-sm font-medium text-gray-300">Description</label>
-                <textarea name="desc" id="id_desc" rows="5"
-                    class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required></textarea>
-            </div>
-
-            <!-- Author -->
-            <div>
-                <label for="id_author" class="block mb-2 text-sm font-medium text-gray-300">Author</label>
-                <input type="text" name="author" id="id_author"
-                    class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required>
-            </div>
-
-            <!-- Published Date -->
-            <div>
-                <label for="id_published" class="block mb-2 text-sm font-medium text-gray-300">Published Date</label>
-                <input type="date" name="published" id="id_published"max="{{current_date}}" 
-                    class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required>
-            </div>
-
-            <!-- File Upload -->
-            <div>
-                <label for="id_file" class="block mb-2 text-sm font-medium text-gray-300">Upload Image or File</label>
-                <input type="file" name="file" id="id_file"
-                    class="block w-full text-sm text-gray-300 bg-gray-700 rounded px-4 py-2 border border-gray-600 file:bg-blue-600 file:text-white file:rounded file:px-4 file:py-2 hover:file:bg-blue-700">
-            </div>
-
-            <!-- Submit Button -->
-            <div class="flex justify-end">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">Publish
-                    Blog</button>
-            </div>
-        </form>
-    </div>
-</body>
-
-</html>
+<!-- Upload Form -->
+<div class="w-full lg:w-[900px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        <!-- Title -->
+        <div>
+            <label for="id_title" class="block mb-2 text-sm font-medium text-gray-300">Title</label>
+            <input type="text" name="title" id="id_title"
+                class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required>
+        </div>
+        <!-- Description -->
+        <div>
+            <label for="id_desc" class="block mb-2 text-sm font-medium text-gray-300">Description</label>
+            <textarea name="desc" id="id_desc" rows="5"
+                class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required></textarea>
+        </div>
+        <!-- Author -->
+        <div>
+            <label for="id_author" class="block mb-2 text-sm font-medium text-gray-300">Author</label>
+            <input type="text" name="author" id="id_author"
+                class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required>
+        </div>
+        <!-- Published Date -->
+        <div>
+            <label for="id_published" class="block mb-2 text-sm font-medium text-gray-300">Published Date</label>
+            <input type="date" name="published" id="id_published" max="{{current_date}}"
+                class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required>
+        </div>
+        <!-- File Upload -->
+        <div>
+            <label for="id_file" class="block mb-2 text-sm font-medium text-gray-300">Upload Image or File</label>
+            <input type="file" name="file" id="id_file"
+                class="block w-full text-sm text-gray-300 bg-gray-700 rounded px-4 py-2 border border-gray-600 file:bg-blue-600 file:text-white file:rounded file:px-4 file:py-2 hover:file:bg-blue-700">
+        </div>
+        <!-- Submit Button -->
+        <div class="flex justify-end">
+            <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded text-sm sm:text-base transition-colors duration-200">Publish
+                Blog</button>
+        </div>
+    </form>
+</div>
