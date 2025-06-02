@@ -54,7 +54,7 @@ def upload_blogs(request):
             )
         return redirect('landing')
     current_date = date.today().isoformat()
-    return render(request,'uploadBlog.html',{'current_date': current_date})
+    return render(request,'uploadBlog.html',{'current_date': current_date, 'is_upload': True})
 def view_blogs(request,id):
     blogs = Blog.objects.get(id = id)
     opinion = Comments.objects.filter(blog_id = id).order_by('created_at')
@@ -76,7 +76,7 @@ def update_blogs(request,id):
         blogs.save()
         return redirect('landing')
     current_date = date.today().isoformat()
-    context = {'blog':blogs,'current_date':current_date}
+    context = {'blog':blogs,'current_date':current_date,'is_update':True}
     return render(request,'updateBlog.html',context)
 def delete_blogs(request,id):
     blogs = Blog.objects.get(id = id)

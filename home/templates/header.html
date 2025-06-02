@@ -14,21 +14,35 @@
     <header class="flex justify-between items-center px-4 md:px-10 py-6 mb-8">
         <h1 class="text-3xl font-bold">
             {% if is_landing %}
-                <a href="{% url 'landing' %}">Welcome to <span class="text-blue-400">Blogify</span></a>
-            {% elif user.is_authenticated %}
-                <a href="{% url 'landing' %}">Welcome, <span class="text-blue-400">{{ user.first_name }}</span></a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'landing' %}">Welcome <span class="text-blue-400">{{ user.first_name }}</span></a>
             {% else %}
-                <a href="{% url 'landing' %}">Welcome to <span class="text-blue-400">Blogify</span></a>
+            <a href="{% url 'landing' %}">Welcome to <span class="text-blue-400">Blogify</span></a>
+            {% endif %}
+            {% elif user.is_authenticated %}
+            {% if is_upload%}
+            <a href="{% url 'landing' %}">Upload a New <span class="text-blue-400">Blog</span></a>
+            {% else %}
+            <a href="{% url 'landing' %}">Welcome <span class="text-blue-400">{{user.first_name}}</span></a>
+            {% endif %}
             {% endif %}
         </h1>
         <div class="space-x-4">
             {% if user.is_authenticated %}
-                <a href="{% url 'upload_blogs' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">+ Upload Blog</a>
-                <a href="{% url 'user_logout' %}" onclick="return confirm('Are you sure you want to log out?');"
-                    class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Logout</a>
+            {% if is_upload or is_update %}
+            <a href="{% url 'landing' %}" class="text-sm bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded">← Back to
+                Home</a>
             {% else %}
-                <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">Register</a>
-                <a href="{% url 'login' %}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Login</a>
+            <a href="{% url 'upload_blogs' %}"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">+ Upload Blog</a>
+            {% endif%}
+            <a href="{% url 'user_logout' %}" onclick="return confirm('Are you sure you want to log out?');"
+                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Logout</a>
+            {% else %}
+            <a href="{% url 'register' %}"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">Register</a>
+            <a href="{% url 'login' %}"
+                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Login</a>
             {% endif %}
         </div>
     </header>
