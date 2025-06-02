@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Blogs - Blogify</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" type="image/png">
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen px-6 py-8">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-10">
+    <h1 class="text-3xl font-bold">Welcome to <span class="text-blue-400">Blogify</span></h1>
+    <div class="space-x-4">
+      <a href="{% url 'register'%}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
+        Register
+      </a>
+      <a href="{% url 'login' %}" class="text-sm bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded">
+        Login
+      </a>
+    </div>
+  </header>
+
+  <!-- Blog Grid -->
+  <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+
+    {% if blog %}
+    {% for b in blog %}
+    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-md flex flex-col">
+      {% if b.file %}
+      <img src="{{ b.file.url }}" alt="Blog Image" class="w-full h-64 object-cover">
+      {% else %}
+      <img src="https://via.placeholder.com/300x400?text=No+Image" alt="Placeholder" class="w-full h-64 object-cover">
+      {% endif %}
+
+      <div class="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          <h2 class="text-xl font-semibold text-blue-300 mb-2">{{ b.title }}</h2>
+          <p class="text-gray-300 text-sm mb-4">
+            {{ b.desc | truncatechars:300 }}
+            <a href="{% url 'view_blogs' b.id %}" target="_blank" class="text-blue-500 hover:underline ml-1">View More?</a>
+          </p>
+        </div>
+        <div class="text-sm text-gray-400 mt-auto">
+          <p>Author: <span class="text-white">{{ b.author }}</span></p>
+          <p>Published: <span class="text-white">{{ b.published }}</span></p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p class="text-gray-400 text-center">No blogs available.
+      <a href="{% url 'upload_blogs' %}" class="text-blue-400 underline">Upload one now!</a>
+    </p>
+    {% endif %}
+  </div>
+
+</body>
+
+</html>

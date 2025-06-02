@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Blog - Blogify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen px-6 py-8">
+
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold">Upload a New Blog</h1>
+        <a href="{% url 'home' %}" class="text-sm bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded">← Back to Home</a>
+    </header>
+
+    <!-- Upload Form -->
+    <div class="bg-gray-800 p-6 rounded-lg shadow-md max-w-2xl mx-auto">
+        <form  method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            <!-- Title -->
+            <div>
+                <label for="id_title" class="block mb-2 text-sm font-medium text-gray-300">Title</label>
+                <input type="text" name="title" id="id_title"
+                    class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>
+            </div>
+            <!-- Description -->
+            <div>
+                <label for="id_desc" class="block mb-2 text-sm font-medium text-gray-300">Description</label>
+                <textarea name="desc" id="id_desc" rows="5"
+                    class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required></textarea>
+            </div>
+
+            <!-- Author -->
+            <div>
+                <label for="id_author" class="block mb-2 text-sm font-medium text-gray-300">Author</label>
+                <input type="text" name="author" id="id_author"
+                    class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>
+            </div>
+
+            <!-- Published Date -->
+            <div>
+                <label for="id_published" class="block mb-2 text-sm font-medium text-gray-300">Published Date</label>
+                <input type="date" name="published" id="id_published"
+                    class="w-full bg-gray-700 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>
+            </div>
+
+            <!-- File Upload -->
+            <div>
+                <label for="id_file" class="block mb-2 text-sm font-medium text-gray-300">Upload Image or File</label>
+                <input type="file" name="file" id="id_file"
+                    class="block w-full text-sm text-gray-300 bg-gray-700 rounded px-4 py-2 border border-gray-600 file:bg-blue-600 file:text-white file:rounded file:px-4 file:py-2 hover:file:bg-blue-700">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">Publish
+                    Blog</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
