@@ -32,7 +32,7 @@
         </div>
         <div>
           <label for="published" class="block text-sm font-medium text-gray-300">Published Date</label>
-          <input type="date" name="published" id="published" value="{{ blog.published|date:'Y-m-d' }}"
+          <input type="date" name="published" id="published" value="{{ blog.published|date:'Y-m-d' }}" max="{{current_date}}"
             class="mt-1 w-full bg-gray-700 text-white border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
             required>
         </div>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from datetime import date
 from django.contrib import messages
 from .models import Blog
 from .models import Comments
@@ -51,9 +52,9 @@ def upload_blogs(request):
             file = file,
             user = request.user,
             )
-        
         return redirect('landing')
-    return render(request,'uploadBlog.html')
+    current_date = date.today().isoformat()
+    return render(request,'uploadBlog.html',{'current_date': current_date})
 def view_blogs(request,id):
     blogs = Blog.objects.get(id = id)
     opinion = Comments.objects.filter(blog_id = id).order_by('created_at')
@@ -61,7 +62,6 @@ def view_blogs(request,id):
     return render(request,'viewBlog.html',context)
 def update_blogs(request,id):
     blogs = Blog.objects.get(id = id)
-    context = {'blog':blogs}
     if request.method == 'POST':
         title = request.POST.get('title')
         desc = request.POST.get('desc')
@@ -75,6 +75,8 @@ def update_blogs(request,id):
             blogs.file = request.FILES['file']
         blogs.save()
         return redirect('landing')
+    current_date = date.today().isoformat()
+    context = {'blog':blogs,'current_date':current_date}
     return render(request,'updateBlog.html',context)
 def delete_blogs(request,id):
     blogs = Blog.objects.get(id = id)
@@ -84,7 +86,7 @@ def landing(request):
     if request.user.is_authenticated:
         blogs = Blog.objects.filter(user=request.user )
     else:
-        blogs = Blog.objects.all()
+        blogs = Blog.objects.all().order_by('published')
     context = {'blog':blogs,'is_landing': True}
     return render(request,'landing.html',context)
 def comments(request,id):
