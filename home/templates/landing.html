@@ -23,6 +23,16 @@
           <p>Author: <span class="text-white">{{ b.author }}</span></p>
           <p>Published: <span class="text-white">{{ b.published }}</span></p>
         </div>
+        {% if user.is_authenticated %}
+        <div class="flex space-x-2 mt-auto">
+          <a href="{% url 'view_blogs' b.id %}"
+            class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm">View</a>
+          <a href="{% url 'update_blogs' b.id %}"
+            class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded text-sm">Update</a>
+          <a href="{% url 'delete_blogs' b.id %}" onclick="return confirm('Are you sure you want to delete?')"
+            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">Delete</a>
+        </div>
+        {% endif %}
       </div>
     </div>
     {% endfor %}

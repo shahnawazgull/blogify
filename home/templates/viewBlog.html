@@ -24,7 +24,7 @@
       <p>Published: <span class="text-white">{{ blog.published }}</span></p>
     </div>
 
-    <a href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'landing' %}{% endif %}"
+    <a href="{% url 'landing' %}"
       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm">
       ← Back to Blogs
     </a>
@@ -83,8 +83,10 @@
   </main>
   {% else %}
   <p class="text-center text-gray-400 py-20">Blog not found.
-    <a href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'landing' %}{% endif %}"
-      class="text-blue-400 underline">Go back to blogs</a>.
+    <a href="{% url 'landing' %}"
+      class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm">
+      ← Back to Blogs
+    </a>
   </p>
   {% endif %}
 

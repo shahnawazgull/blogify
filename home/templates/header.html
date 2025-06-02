@@ -4,28 +4,40 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Blogs - Blogify</title>
+    <title>{% block title %}Blogify{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" type="image/png">
 </head>
-<header class="flex justify-between items-center px-4 md:px-10 py-6 mb-8">
-    <h1 class="text-3xl font-bold">
-        {% if user.is_authenticated %}
-        Welcome, <span class="text-blue-400">{{ user.first_name }}</span>
-        {% else %}
-        Welcome to <span class="text-blue-400">Blogify</span>
-        {% endif %}
-    </h1>
-    <div class="space-x-4">
-        {% if user.is_authenticated %}
-        <a href="{% url 'upload_blogs' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">+
-            Upload Blog</a>
-        <a href="{% url 'user_logout' %}" onclick="return confirm('Are you sure you want to log out?');"
-            class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Logout</a>
-        {% else %}
-        <a href="{% url 'register' %}"
-            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">Register</a>
-        <a href="{% url 'login' %}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Login</a>
-        {% endif %}
-    </div>
-</header>
+
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="flex justify-between items-center px-4 md:px-10 py-6 mb-8">
+        <h1 class="text-3xl font-bold">
+            {% if is_landing %}
+                <a href="{% url 'landing' %}">Welcome to <span class="text-blue-400">Blogify</span></a>
+            {% elif user.is_authenticated %}
+                <a href="{% url 'landing' %}">Welcome, <span class="text-blue-400">{{ user.first_name }}</span></a>
+            {% else %}
+                <a href="{% url 'landing' %}">Welcome to <span class="text-blue-400">Blogify</span></a>
+            {% endif %}
+        </h1>
+        <div class="space-x-4">
+            {% if user.is_authenticated %}
+                <a href="{% url 'upload_blogs' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">+ Upload Blog</a>
+                <a href="{% url 'user_logout' %}" onclick="return confirm('Are you sure you want to log out?');"
+                    class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Logout</a>
+            {% else %}
+                <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">Register</a>
+                <a href="{% url 'login' %}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">Login</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="px-4 md:px-10">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>

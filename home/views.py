@@ -28,17 +28,11 @@ def user_log(request):
         user = authenticate(username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('landing')
         else:
             messages.error(request,'Invalid Crednetials')
             return redirect('login')
     return render(request, 'login.html')
-@login_required(login_url='login')
-def home(request):
-    user = request.user
-    blogs = Blog.objects.filter(user=user)
-    context = {'user':user,'blog': blogs}
-    return render(request,'index.html',context)
 def user_logout(request):
     logout(request)
     return redirect('landing')
@@ -58,7 +52,7 @@ def upload_blogs(request):
             user = request.user,
             )
         
-        return redirect('home')
+        return redirect('landing')
     return render(request,'uploadBlog.html')
 def view_blogs(request,id):
     blogs = Blog.objects.get(id = id)
@@ -80,15 +74,15 @@ def update_blogs(request,id):
         if 'file' in request.FILES:
             blogs.file = request.FILES['file']
         blogs.save()
-        return redirect('home')
+        return redirect('landing')
     return render(request,'updateBlog.html',context)
 def delete_blogs(request,id):
     blogs = Blog.objects.get(id = id)
     blogs.delete()
-    return redirect('home')
+    return redirect('landing')
 def landing(request):
     blogs = Blog.objects.all()
-    context = {'blog':blogs}
+    context = {'blog':blogs,'is_landing': True}
     return render(request,'landing.html',context)
 def comments(request,id):
     if request.method == 'POST':
