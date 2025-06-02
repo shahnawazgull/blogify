@@ -1,31 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Blogs - Blogify</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" type="image/png">
-</head>
+{% include "header.html" %}
 
 <body class="bg-gray-900 text-white min-h-screen px-6 py-8">
-
-  <!-- Header -->
-  <header class="flex justify-between items-center mb-8">
-    <h1 class="text-3xl font-bold">Welcome, <span class="text-blue-400">{{ user.first_name }}</span></h1>
-    <div class="space-x-4">
-      <a href="{% url 'upload_blogs'%}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
-        + Upload Blog
-      </a>
-      <a href="{% url 'user_logout' %}" onclick="return confirm('Are you sure you want to log out?');"
-        class="text-sm bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded">
-        Logout
-      </a>
-    </div>
-  </header>
-
-
   <!-- Blog Grid -->
   <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 
@@ -40,16 +15,20 @@
       <div class="p-4 flex-1 flex flex-col justify-between">
         <div>
           <h2 class="text-xl font-semibold text-blue-300 mb-2">{{ b.title }}</h2>
-          <p class="text-gray-300 text-sm mb-3">{{ b.desc | truncatechars:300 }} <span class="text-blue-600"><a href="{% url 'view_blogs' b.id %}" target="_blank">viewMore</a></span></p>
+          <p class="text-gray-300 text-sm mb-3">{{ b.desc | truncatechars:300 }} <span class="text-blue-600"><a
+                href="{% url 'view_blogs' b.id %}" target="_blank">viewMore</a></span></p>
         </div>
         <div class="text-sm text-gray-400 mb-4">
           <p>Author: <span class="text-white">{{ b.author }}</span></p>
           <p>Published: <span class="text-white">{{ b.published }}</span></p>
         </div>
         <div class="flex space-x-2 mt-auto">
-          <a href="{% url 'view_blogs' b.id %}" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm">View</a>
-          <a href="{% url 'update_blogs' b.id %}" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded text-sm">Update</a>
-          <a href="{% url 'delete_blogs' b.id %}" onclick="return confirm('Are you sure you want to delete?')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">Delete</a>
+          <a href="{% url 'view_blogs' b.id %}"
+            class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm">View</a>
+          <a href="{% url 'update_blogs' b.id %}"
+            class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded text-sm">Update</a>
+          <a href="{% url 'delete_blogs' b.id %}" onclick="return confirm('Are you sure you want to delete?')"
+            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">Delete</a>
         </div>
       </div>
     </div>

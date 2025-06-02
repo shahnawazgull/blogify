@@ -1,33 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Blogs - Blogify</title>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" type="image/png">
-</head>
-
-<body class="bg-gray-900 text-white min-h-screen px-6 py-8">
-
-  <!-- Header -->
-  <header class="flex justify-between items-center mb-10">
-    <h1 class="text-3xl font-bold">Welcome to <span class="text-blue-400">Blogify</span></h1>
-    <div class="space-x-4">
-      <a href="{% url 'register'%}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
-        Register
-      </a>
-      <a href="{% url 'login' %}" class="text-sm bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded">
-        Login
-      </a>
-    </div>
-  </header>
-
+{% include "header.html" %}
   <!-- Blog Grid -->
   <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 
