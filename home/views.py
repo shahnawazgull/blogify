@@ -103,3 +103,12 @@ def comments(request,id):
         )
         return redirect('view_blogs',id=id)
     return render(request,'viewBlog.html')
+# forms.py
+from django.contrib.auth.forms import SetPasswordForm
+
+class CustomSetPasswordForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        css_class = 'w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
+        self.fields['new_password1'].widget.attrs.update({'class': css_class})
+        self.fields['new_password2'].widget.attrs.update({'class': css_class})

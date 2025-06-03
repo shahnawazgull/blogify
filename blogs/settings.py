@@ -86,9 +86,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -102,7 +99,14 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = 'static/'
-
-
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'             # Gmail SMTP server
+EMAIL_PORT = 587                          # TLS port
+EMAIL_USE_TLS = True                      # Use TLS (recommended)
+EMAIL_HOST_USER = 'shahnawazgull2166@gmail.com'  # Replace with your Gmail
+EMAIL_HOST_PASSWORD = 'luovdckxlvwbhmpn' # Use app password, NOT Gmail password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
